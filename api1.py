@@ -23,11 +23,12 @@ payload = json.dumps({
       },
       {
         "value": [
+          "ge0/1",
           "ge0/2"
         ],
         "field": "interface",
         "type": "string",
-        "operator": "equal"
+        "operator": "in"
       }
     ]
   },
@@ -61,6 +62,8 @@ payload = json.dumps({
 
 
 response = api.send_request("POST", path, auth.headers, payload)
+
+print(json.dumps(response, indent=4))
 
 with open("api1.csv", 'w', newline='', encoding='utf-8') as output:  
     writer = csv.writer(output, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
