@@ -1,0 +1,5 @@
+system-ip,hostname,interface,rx_octets,tx_octets
+10.100.206.251,BR1259-Central_Phuket_Floresta_1,ge0/2,19543869,363048
+10.30.10.101,HQ-vEdge5000-01,ge0/2,0,0
+10.30.20.101,CWN-vEdge5000-01,ge0/2,0,0
+10.71.61.251,BR0869-TescoLotus_BanPong_1,ge0/2,19545825,362964
