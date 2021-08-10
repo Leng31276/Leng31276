@@ -6,7 +6,7 @@ import requests
 auth = vmanage.Authentication()
 api = vmanage.API()
 
-path = "dataservice/statistics/interface/aggregation"
+path = "/statistics/interface/aggregation"
 
 payload = json.dumps({
   "query": {
