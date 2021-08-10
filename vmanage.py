@@ -51,7 +51,7 @@ class Authentication:
 
 class API:
 
-    base_url = "https://{}:{}/".format(settings.vmanage_host, settings.vmanage_port)
+    base_url = "https://{}:{}/dataservice".format(settings.vmanage_host, settings.vmanage_port)
 
     def send_request(self, method, path, headers, payload):
         url = self.base_url + path
