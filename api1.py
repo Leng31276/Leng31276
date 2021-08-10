@@ -14,8 +14,8 @@ payload = json.dumps({
     "rules": [
       {
         "value": [
-          "2021-08-01T00:00:00 UTC",
-          "2021-08-01T23:59:59 UTC"
+          "2021-08-01T17:00:00 UTC",
+          "2021-08-02T16:59:59 UTC"
         ],
         "field": "entry_time",
         "type": "date",
@@ -23,6 +23,7 @@ payload = json.dumps({
       },
       {
         "value": [
+          "ge0/0",
           "ge0/1",
           "ge0/2"
         ],
@@ -49,24 +50,23 @@ payload = json.dumps({
     ],
     "metrics": [
       {
-        "property": "rx_octets",
-        "type": "sum"
+        "property": "rx_kbps",
+        "type": "max"
       },
       {
-        "property": "tx_octets",
-        "type": "sum"
+        "property": "tx_kbps",
+        "type": "max"
       }
     ]
   }
 })
 
-
 response = api.send_request("POST", path, auth.headers, payload)
 
-print(json.dumps(response, indent=4))
+# print(json.dumps(response, indent=4))
 
 with open("api1.csv", 'w', newline='', encoding='utf-8') as output:  
     writer = csv.writer(output, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-    writer.writerow(['system-ip', 'hostname', 'interface', 'rx_octets', 'tx_octets'])
+    writer.writerow(['system-ip', 'hostname', 'interface', 'rx_kbps', 'tx_kbps'])
     for row in response['data']:
-        writer.writerow([row['vmanage_system_ip'], row['host_name'], row['interface'], row['rx_octets'], row['tx_octets']])
+        writer.writerow([row['vmanage_system_ip'], row['host_name'], row['interface'], row['rx_kbps'], row['tx_kbps']])
