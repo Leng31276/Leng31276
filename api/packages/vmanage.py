@@ -1,5 +1,5 @@
 import requests
-import settings
+from .. import settings
 
 # Suppress only the single warning from urllib3 needed.
 requests.packages.urllib3.disable_warnings()
@@ -49,8 +49,8 @@ class Authentication:
         else:
             return None
 
-class API:
 
+class API:
     base_url = "https://{}:{}/dataservice".format(settings.vmanage_host, settings.vmanage_port)
 
     def send_request(self, method, path, headers, payload):
