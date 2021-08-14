@@ -1,6 +1,8 @@
 from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
+from pathlib import Path
 
+from api import settings
 from api.packages import vmanage
 
 import csv
@@ -84,10 +86,12 @@ def run():
 
   # debug output
   # print(json.dumps(response, indent=4))
-  file_path = os.path.dirname(os.path.abspath(__file__))+"/csv/"
+  
+  file_path = Path.joinpath(settings.BASE_DIR, "api1/csv")
   file_name = "api1-{}.csv".format(d_now.strftime("%Y-%m-%d"))
-  file_uri = "%s%s"%(file_path, file_name)
-  with open(file_uri,  'w', newline='', encoding='utf-8') as output:  
+  full_path = Path(file_path, file_name)
+
+  with open(full_path,  'w', newline='', encoding='utf-8') as output:  
       writer = csv.writer(output, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
       writer.writerow(['system-ip', 'hostname', 'interface', 'max_rx_kbps', 'sum_rx_octets', 'max_tx_kbps', 'sum_tx_octets', 'sample', 'start_datetime', 'end_datetime'])
       for row in response['data']:
