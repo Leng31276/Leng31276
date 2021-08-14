@@ -5,12 +5,10 @@ from .. import settings
 requests.packages.urllib3.disable_warnings()
 
 class Authentication:
-    vmanage_host = settings.vmanage_host
-    vmanage_port = settings.vmanage_port
-    username = settings.vmanage_username
-    password = settings.vmanage_password
+    vmanage_host = settings.VMANAGE_HOST
+    vmanage_port = settings.VMANAGE_PORT
 
-    def __init__(self, vmanage_host=vmanage_host, vmanage_port=vmanage_port, username=username, password=password):
+    def __init__(self, vmanage_host=vmanage_host, vmanage_port=vmanage_port, username=settings.VMANAGE_USER, password=settings.VMANAGE_PASS):
         self.vmanage_host = vmanage_host
         self.vmanage_port = vmanage_port
         self.jsessionid = self.get_jsessionid(vmanage_host, vmanage_port, username, password)
@@ -51,7 +49,7 @@ class Authentication:
 
 
 class API:
-    base_url = "https://{}:{}/dataservice".format(settings.vmanage_host, settings.vmanage_port)
+    base_url = "https://{}:{}/dataservice".format(settings.VMANAGE_HOST, settings.VMANAGE_PORT)
 
     def send_request(self, method, path, headers, payload):
         url = self.base_url + path
