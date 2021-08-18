@@ -2,14 +2,13 @@ import csv
 import json
 
 from datetime import date, datetime, timedelta, timezone
-from zoneinfo import ZoneInfo
 from pathlib import Path
 
 from api import settings
 from api.packages import vmanage
 
 
-def run(report_date=None, tzinfo="Asia/Bangkok"):
+def run(report_date=None):
     auth = vmanage.Authentication()
     api = vmanage.API()
 
@@ -20,8 +19,7 @@ def run(report_date=None, tzinfo="Asia/Bangkok"):
     else:
         today = report_date
 
-    tz = ZoneInfo(tzinfo)
-    d2 = datetime(today.year, today.month, today.day, 0, 0, 0, tzinfo=tz)
+    d2 = datetime(today.year, today.month, today.day, 0, 0, 0).astimezone()
     d1 = d2 - timedelta(days=1)
     d2_utc = (d2 - d2.utcoffset()).replace(tzinfo=timezone.utc)
     d1_utc = d2_utc - timedelta(days=1)
