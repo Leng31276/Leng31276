@@ -6,7 +6,7 @@ from api.api1 import api1
 from api.packages import excel_pivot
 
 if __name__ == '__main__':
-    report_date = date(2021, 8, 10)
+    report_date = date.today()
     api1.run(report_date)
 
     # api1_csv_dir = Path.joinpath(settings.BASE_DIR, "api1/csv")
